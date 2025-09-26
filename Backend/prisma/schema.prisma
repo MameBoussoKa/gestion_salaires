@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model Entreprise {
+  id         Int         @id @default(autoincrement())
+  nom        String
+  logo       String?
+  adresse    String?
+  devise     String
+  periode    String      // mensuelle, hebdo, journalière
+  utilisateurs Utilisateur[]
+  employes   Employe[]
+  cyclesPaie CyclePaie[]
+  createdAt  DateTime    @default(now())
+}
+
+model Utilisateur {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  password     String
+  role         String     // super-admin, admin, caissier
+  entrepriseId Int?
+  entreprise   Entreprise? @relation(fields: [entrepriseId], references: [id])
+  createdAt    DateTime   @default(now())
+}
+
+model Employe {
+  id           Int        @id @default(autoincrement())
+  nomComplet   String
+  poste        String
+  typeContrat  String     // journalier, fixe, honoraire
+  tauxSalaire  Float
+  coordonneesBancaires String?
+  actif        Boolean    @default(true)
+  entrepriseId Int
+  entreprise   Entreprise @relation(fields: [entrepriseId], references: [id])
+  bulletins    Bulletin[]
+  createdAt    DateTime   @default(now())
+}
+
+model CyclePaie {
+  id           Int        @id @default(autoincrement())
+  periode      String     // ex: "2025-09" ou "Semaine 39"
+  type         String     // mensuel, hebdo, journalier
+  statut       String     // brouillon, approuvé, clôturé
+  entrepriseId Int
+  entreprise   Entreprise @relation(fields: [entrepriseId], references: [id])
+  bulletins    Bulletin[]
+  createdAt    DateTime   @default(now())
+}
+
+model Bulletin {
+  id           Int        @id @default(autoincrement())
+  employeId    Int
+  employe      Employe    @relation(fields: [employeId], references: [id])
+  cyclePaieId  Int
+  cyclePaie    CyclePaie  @relation(fields: [cyclePaieId], references: [id])
+  brut         Float
+  deductions   Float
+  netAPayer    Float
+  statut       String     // payé, partiel, en attente
+  paiements    Paiement[]
+  createdAt    DateTime   @default(now())
+}
+
+model Paiement {
+  id          Int      @id @default(autoincrement())
+  montant     Float
+  mode        String   // espèces, virement, Orange Money, Wave, etc.
+  date        DateTime @default(now())
+  bulletinId  Int
+  bulletin    Bulletin @relation(fields: [bulletinId], references: [id])
+  recuPDF     String?  // chemin ou URL du reçu PDF
+}
+
+
+
+
+
+
+
+
+
+
+// Entreprise : regroupe les utilisateurs, employés, cycles de paie.
+
+// Utilisateur : peut être super-admin (multi-entreprise), admin ou caissier (lié à une entreprise).
+
+// Employe : appartient à une entreprise, a plusieurs bulletins.
+
+// CyclePaie : un cycle de paie pour une entreprise, regroupe plusieurs bulletins.
+
+// Bulletin : bulletin de paie d’un employé pour un cycle, peut avoir plusieurs paiements.
+
+// Paiement : versement (total ou partiel) lié à un bulletin.
+
