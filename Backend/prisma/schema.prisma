@@ -6,13 +6,15 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+
 }
+
 model Entreprise {
   id         Int         @id @default(autoincrement())
   nom        String
@@ -27,7 +29,8 @@ model Entreprise {
 }
 
 model Utilisateur {
-  id           Int        @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
+  nomcomplet   String
   email        String     @unique
   password     String
   role         String     // super-admin, admin, caissier
