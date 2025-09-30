@@ -16,12 +16,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/auth', authRoutes);
-app.use('/users', userRoutes);
-app.use('/entreprises', entrepriseRoutes);
-app.use('/employes', employeRoutes);
-app.use('/cycles-paie', cyclePaieRoutes);
-app.use('/bulletins', bulletinRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/entreprises', entrepriseRoutes);
+app.use('/api/v1/employes', employeRoutes);
+app.use('/api/v1/cycles-paie', cyclePaieRoutes);
+app.use('/api/v1/bulletins', bulletinRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
