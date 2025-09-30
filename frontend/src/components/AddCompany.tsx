@@ -52,13 +52,13 @@ const AddCompany: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
+    <div className="min-h-screen bg-[#F4EBD3]">
+      <header className="bg-[#DED3C4] shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900">Ajouter une entreprise</h1>
+          <h1 className="text-3xl font-bold text-[#555879]">Ajouter une entreprise</h1>
           <button
             onClick={() => navigate('/dashboard')}
-            className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-[#555879] hover:bg-[#555879]/90 text-[#F4EBD3] font-bold py-2 px-4 rounded"
           >
             Retour
           </button>
@@ -67,9 +67,9 @@ const AddCompany: React.FC = () => {
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           <div className="max-w-md mx-auto">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-[#DED3C4] p-8 rounded-2xl shadow-xl border-2 border-[#98A1BC]/30">
               <div>
-                <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="nom" className="block text-sm font-medium text-[#555879]">
                   Nom de l'entreprise
                 </label>
                 <input
@@ -77,49 +77,49 @@ const AddCompany: React.FC = () => {
                   name="nom"
                   id="nom"
                   required
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full border-2 border-[#98A1BC]/30 rounded-md shadow-sm focus:ring-2 focus:ring-[#555879] focus:border-[#555879] bg-[#F4EBD3] text-[#555879] sm:text-sm"
                   value={formData.nom}
                   onChange={handleChange}
                 />
               </div>
 
               <div>
-                <label htmlFor="logo" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="logo" className="block text-sm font-medium text-[#555879]">
                   Logo (URL)
                 </label>
                 <input
                   type="url"
                   name="logo"
                   id="logo"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full border-2 border-[#98A1BC]/30 rounded-md shadow-sm focus:ring-2 focus:ring-[#555879] focus:border-[#555879] bg-[#F4EBD3] text-[#555879] sm:text-sm"
                   value={formData.logo}
                   onChange={handleChange}
                 />
               </div>
 
               <div>
-                <label htmlFor="adresse" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="adresse" className="block text-sm font-medium text-[#555879]">
                   Adresse
                 </label>
                 <input
                   type="text"
                   name="adresse"
                   id="adresse"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full border-2 border-[#98A1BC]/30 rounded-md shadow-sm focus:ring-2 focus:ring-[#555879] focus:border-[#555879] bg-[#F4EBD3] text-[#555879] sm:text-sm"
                   value={formData.adresse}
                   onChange={handleChange}
                 />
               </div>
 
               <div>
-                <label htmlFor="devise" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="devise" className="block text-sm font-medium text-[#555879]">
                   Devise
                 </label>
                 <select
                   name="devise"
                   id="devise"
                   required
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full border-2 border-[#98A1BC]/30 rounded-md shadow-sm focus:ring-2 focus:ring-[#555879] focus:border-[#555879] bg-[#F4EBD3] text-[#555879] sm:text-sm"
                   value={formData.devise}
                   onChange={handleChange}
                 >
@@ -130,14 +130,14 @@ const AddCompany: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="periode" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="periode" className="block text-sm font-medium text-[#555879]">
                   Période de paie
                 </label>
                 <select
                   name="periode"
                   id="periode"
                   required
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full border-2 border-[#98A1BC]/30 rounded-md shadow-sm focus:ring-2 focus:ring-[#555879] focus:border-[#555879] bg-[#F4EBD3] text-[#555879] sm:text-sm"
                   value={formData.periode}
                   onChange={handleChange}
                 >
@@ -159,7 +159,7 @@ const AddCompany: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-[#F4EBD3] bg-[#555879] hover:bg-[#555879]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#555879] disabled:opacity-50 transform transition-all duration-200 ease-in-out hover:scale-[1.02]"
                 >
                   {loading ? 'Création...' : 'Créer l\'entreprise'}
                 </button>

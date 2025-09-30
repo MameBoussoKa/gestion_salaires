@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Login';
 import Register from './components/Register';
+import AddEmployee from './components/AddEmployee';
+import EditUser from './components/EditUser';
+import EditEmployee from './components/EditEmployee';
 import ModernDashboard from './components/ModernDashboard';
 import CompaniesList from './components/CompaniesList';
 import AddCompany from './components/AddCompany';
@@ -63,6 +66,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <AddUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit-user/:userId"
+            element={
+              <ProtectedRoute>
+                <EditUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/add-employee"
+            element={
+              <ProtectedRoute>
+                <AddEmployee />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/add-employee/:companyId"
+            element={
+              <ProtectedRoute>
+                <AddEmployee />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit-employee/:employeeId"
+            element={
+              <ProtectedRoute>
+                <EditEmployee />
               </ProtectedRoute>
             }
           />

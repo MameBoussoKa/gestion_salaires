@@ -124,12 +124,13 @@ const ModernDashboard: React.FC = () => {
         </nav>
 
         {/* Logout Button */}
-        <div className="absolute bottom-8 left-4 right-4">
+        <div className="absolute bottom-8 left-4 ">
           <button
             onClick={handleLogout}
-            className="w-full bg-[#555879] hover:bg-[#555879]/90 text-[#F4EBD3] font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+            className="w-auto mx-auto bg-[#555879] hover:bg-[#555879]/90 text-[#F4EBD3] font-medium py-1.5 px-3 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-1.5 text-xs"
+            title="Déconnexion"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             <span>Déconnexion</span>
@@ -217,12 +218,82 @@ const ModernDashboard: React.FC = () => {
               {/* Area Chart */}
               <div className="lg:col-span-2 bg-[#DED3C4] rounded-lg shadow-sm border-2 border-[#98A1BC]/30 p-6">
                 <h3 className="text-lg font-semibold text-[#555879] mb-4">Évolution Annuelle</h3>
-                <div className="h-64 flex items-center justify-center bg-[#F4EBD3] rounded-lg">
-                  <div className="text-center">
-                    <svg className="w-12 h-12 text-[#98A1BC] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                    <p className="text-[#98A1BC]">Graphique d'évolution (Jan-Déc)</p>
+                <div className="h-64 bg-[#F4EBD3] rounded-lg p-4">
+                  <div className="flex justify-between items-end h-full">
+                    {/* Janvier */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#555879] rounded-t-sm mb-2" style={{height: '40px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Jan</span>
+                    </div>
+                    {/* Février */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#555879] rounded-t-sm mb-2" style={{height: '55px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Fév</span>
+                    </div>
+                    {/* Mars */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#98A1BC] rounded-t-sm mb-2" style={{height: '70px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Mar</span>
+                    </div>
+                    {/* Avril */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#98A1BC] rounded-t-sm mb-2" style={{height: '85px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Avr</span>
+                    </div>
+                    {/* Mai */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#555879] rounded-t-sm mb-2" style={{height: '95px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Mai</span>
+                    </div>
+                    {/* Juin */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#555879] rounded-t-sm mb-2" style={{height: '110px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Jun</span>
+                    </div>
+                    {/* Juillet */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#DED3C4] rounded-t-sm mb-2 border border-[#98A1BC]/30" style={{height: '125px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Jul</span>
+                    </div>
+                    {/* Août */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#DED3C4] rounded-t-sm mb-2 border border-[#98A1BC]/30" style={{height: '140px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Aoû</span>
+                    </div>
+                    {/* Septembre */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#555879] rounded-t-sm mb-2" style={{height: '155px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Sep</span>
+                    </div>
+                    {/* Octobre */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#555879] rounded-t-sm mb-2" style={{height: '170px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Oct</span>
+                    </div>
+                    {/* Novembre */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#98A1BC] rounded-t-sm mb-2" style={{height: '185px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Nov</span>
+                    </div>
+                    {/* Décembre */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-8 bg-[#98A1BC] rounded-t-sm mb-2" style={{height: '200px'}}></div>
+                      <span className="text-xs text-[#98A1BC] font-medium">Déc</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-center mt-4 space-x-6">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 bg-[#555879] rounded-sm mr-2"></div>
+                      <span className="text-xs text-[#98A1BC]">Revenus</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 bg-[#98A1BC] rounded-sm mr-2"></div>
+                      <span className="text-xs text-[#98A1BC]">Dépenses</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 bg-[#DED3C4] rounded-sm mr-2 border border-[#98A1BC]/30"></div>
+                      <span className="text-xs text-[#98A1BC]">Bénéfices</span>
+                    </div>
                   </div>
                 </div>
               </div>

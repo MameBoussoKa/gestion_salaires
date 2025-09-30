@@ -31,8 +31,13 @@ export class EmployeController {
         try {
             const employe = await this.employeRepository.create(req.body);
             res.status(201).json(employe);
-        } catch (error) {
-            res.status(500).json({ error: 'Erreur serveur' });
+        } catch (error: any) {
+            console.error('Erreur création employé:', error);
+            if (error.code === 'P2003') {
+                res.status(400).json({ error: 'L\'entreprise spécifiée n\'existe pas' });
+            } else {
+                res.status(500).json({ error: 'Erreur serveur lors de la création de l\'employé' });
+            }
         }
     }
 
