@@ -53,7 +53,11 @@ export class UserController {
     async updateUser(req: Request, res: Response): Promise<void> {
         try {
             const id = parseInt(req.params.id);
-            const user = await this.userService.updateUser(id, req.body);
+            // Filter out undefined values for partial updates
+            const updateData = Object.fromEntries(
+                Object.entries(req.body).filter(([_, value]) => value !== undefined)
+            );
+            const user = await this.userService.updateUser(id, updateData);
             res.json(user);
         } catch (error) {
             res.status(500).json({ error: 'Erreur serveur' });

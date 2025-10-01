@@ -9,18 +9,26 @@ export class EntrepriseRepository implements IRepository<Entreprise> {
     }
 
     async findById(id: number): Promise<Entreprise | null> {
-        return await this.prisma.entreprise.findUnique({
-            where: { id },
-        });
+        console.log('Repository: Recherche entreprise ID:', id);
+        try {
+            const result = await this.prisma.entreprise.findUnique({
+                where: { id },
+            });
+            console.log('Repository: Résultat:', result);
+            return result;
+        } catch (error) {
+            console.error('Repository: Erreur Prisma:', error);
+            throw error;
+        }
     }
 
-    async create(data: { nom: string; logo?: string | null; adresse?: string | null; devise: string; periode: string }): Promise<Entreprise> {
+    async create(data: { nom: string; logo?: string | null; adresse?: string | null; devise: string; periode: string; couleur?: string | null }): Promise<Entreprise> {
         return await this.prisma.entreprise.create({
             data,
         });
     }
 
-    async update(id: number, data: Partial<{ nom: string; logo?: string; adresse?: string; devise: string; periode: string }>): Promise<Entreprise> {
+    async update(id: number, data: Partial<{ nom: string; logo?: string; adresse?: string; devise: string; periode: string; couleur?: string }>): Promise<Entreprise> {
         return await this.prisma.entreprise.update({
             where: { id },
             data,

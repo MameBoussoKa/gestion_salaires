@@ -21,11 +21,18 @@ model Entreprise {
   logo       String?
   adresse    String?
   devise     String
-  periode    String      // mensuelle, hebdo, journalière
+  periode    Periode      // mensuelle, hebdo, journalière
+  couleur    String?     // couleur thème de l'entreprise (hex code)
   utilisateurs Utilisateur[]
   employes   Employe[]
   cyclesPaie CyclePaie[]
   createdAt  DateTime    @default(now())
+}
+
+enum Periode {
+  journaliere
+  hebdo
+  mensuelle
 }
 
 model Utilisateur {

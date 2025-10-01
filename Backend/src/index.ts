@@ -7,6 +7,7 @@ import entrepriseRoutes from './routes/EntrepriseRoute.js';
 import employeRoutes from './routes/EmployeRoute.js';
 import cyclePaieRoutes from './routes/CyclePaieRoute.js';
 import bulletinRoutes from './routes/BulletinRoute.js';
+import paiementRoutes from './routes/PaiementRoute.js';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use('/api/v1/entreprises', entrepriseRoutes);
 app.use('/api/v1/employes', employeRoutes);
 app.use('/api/v1/cycles-paie', cyclePaieRoutes);
 app.use('/api/v1/bulletins', bulletinRoutes);
+app.use('/api/v1/paiements', paiementRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

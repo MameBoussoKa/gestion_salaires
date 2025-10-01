@@ -7,19 +7,37 @@ import AddEmployee from './components/AddEmployee';
 import EditUser from './components/EditUser';
 import EditEmployee from './components/EditEmployee';
 import ModernDashboard from './components/ModernDashboard';
+import SuperAdminDashboard from './components/SuperAdminDashboard';
+import AdminDashboard from './components/AdminDashboard';
 import CompaniesList from './components/CompaniesList';
 import AddCompany from './components/AddCompany';
 import UsersList from './components/UsersList';
 import AddUser from './components/AddUser';
 import EmployeesList from './components/EmployeesList';
+import EmployeeDetails from './components/EmployeeDetails';
+import SalaryPayment from './components/SalaryPayment';
 
 const Dashboard = () => {
-  return <ModernDashboard />;
+  return <RoleBasedDashboard />;
 };
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+};
+
+const RoleBasedDashboard = () => {
+  const { user } = useAuth();
+
+  if (!user) return <Navigate to="/login" />;
+
+  if (user.role === 'super-admin') {
+    return <SuperAdminDashboard />;
+  } else if (user.role === 'admin') {
+    return <AdminDashboard />;
+  } else {
+    return <Navigate to="/login" />;
+  }
 };
 
 function App() {
@@ -106,6 +124,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <EmployeesList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee-details/:employeeId"
+            element={
+              <ProtectedRoute>
+                <EmployeeDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/salary-payment"
+            element={
+              <ProtectedRoute>
+                <SalaryPayment />
               </ProtectedRoute>
             }
           />

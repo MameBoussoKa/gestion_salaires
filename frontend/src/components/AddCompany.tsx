@@ -7,7 +7,8 @@ const AddCompany: React.FC = () => {
     logo: '',
     adresse: '',
     devise: 'XOF',
-    periode: 'mensuelle'
+    periode: 'mensuelle',
+    couleur: '#555879'
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -142,9 +143,35 @@ const AddCompany: React.FC = () => {
                   onChange={handleChange}
                 >
                   <option value="mensuelle">Mensuelle</option>
-                  <option value="hebdomadaire">Hebdomadaire</option>
-                  <option value="journaliere">Journalière</option>
+                  <option value="hebdo">Hebdomadaire</option>
+                  <option value="journalière">Journalière</option>
                 </select>
+              </div>
+
+              <div>
+                <label htmlFor="couleur" className="block text-sm font-medium text-[#555879]">
+                  Couleur thème
+                </label>
+                <div className="mt-1 flex items-center space-x-3">
+                  <input
+                    type="color"
+                    name="couleur"
+                    id="couleur"
+                    className="h-10 w-16 border-2 border-[#98A1BC]/30 rounded-md cursor-pointer"
+                    value={formData.couleur}
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="text"
+                    value={formData.couleur}
+                    onChange={(e) => setFormData({...formData, couleur: e.target.value})}
+                    className="flex-1 border-2 border-[#98A1BC]/30 rounded-md shadow-sm focus:ring-2 focus:ring-[#555879] focus:border-[#555879] bg-[#F4EBD3] text-[#555879] sm:text-sm px-3 py-2"
+                    placeholder="#555879"
+                  />
+                </div>
+                <p className="mt-1 text-xs text-[#98A1BC]">
+                  Choisissez la couleur principale pour cette entreprise
+                </p>
               </div>
 
               {error && (

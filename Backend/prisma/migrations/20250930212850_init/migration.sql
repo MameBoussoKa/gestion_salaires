@@ -6,6 +6,7 @@ CREATE TABLE `Entreprise` (
     `adresse` VARCHAR(191) NULL,
     `devise` VARCHAR(191) NOT NULL,
     `periode` VARCHAR(191) NOT NULL,
+    `couleur` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
@@ -14,6 +15,7 @@ CREATE TABLE `Entreprise` (
 -- CreateTable
 CREATE TABLE `Utilisateur` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `nomcomplet` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
     `role` VARCHAR(191) NOT NULL,

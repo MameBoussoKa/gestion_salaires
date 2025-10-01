@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { UserController } from '../controllers/UserController.js';
 import { AuthMiddleware } from '../middlewares/AuthMiddleware.js';
 import { validateSchema } from '../middlewares/validateSchema.js';
-import { utilisateurSchema } from '../utiles/validators/utilisateurValidator.js';
+import { utilisateurSchema, utilisateurUpdateSchema } from '../utiles/validators/utilisateurValidator.js';
 
 const router = Router();
 const userController = new UserController();
@@ -21,7 +21,7 @@ router.get('/:id', userController.getUserById.bind(userController));
 router.post('/', validateSchema(utilisateurSchema), userController.createUser.bind(userController));
 
 // PUT /users/:id - Modification d'utilisateur (admin)
-router.put('/:id', validateSchema(utilisateurSchema), userController.updateUser.bind(userController));
+router.put('/:id', userController.updateUser.bind(userController));
 
 // DELETE /users/:id - Suppression d'utilisateur (admin)
 router.delete('/:id', userController.deleteUser.bind(userController));

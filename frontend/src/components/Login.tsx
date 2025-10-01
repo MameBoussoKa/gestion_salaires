@@ -46,7 +46,7 @@ const Login: React.FC = () => {
                   id="email"
                   name="email"
                   type="email"
-                  required
+                  // required
                   className="appearance-none relative block w-full px-4 py-3 border-2 border-[#98A1BC]/30 placeholder-[#98A1BC] text-[#555879] bg-[#F4EBD3] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#555879] focus:border-[#555879] transition-all duration-200 ease-in-out"
                   placeholder="votre@email.com"
                   value={email}
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
                   id="password"
                   name="password"
                   type="password"
-                  required
+                  // required
                   className="appearance-none relative block w-full px-4 py-3 border-2 border-[#98A1BC]/30 placeholder-[#98A1BC] text-[#555879] bg-[#F4EBD3] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#555879] focus:border-[#555879] transition-all duration-200 ease-in-out"
                   placeholder="••••••••"
                   value={password}

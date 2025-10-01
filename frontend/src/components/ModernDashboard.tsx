@@ -123,19 +123,7 @@ const ModernDashboard: React.FC = () => {
           </div>
         </nav>
 
-        {/* Logout Button */}
-        <div className="absolute bottom-8 left-4 ">
-          <button
-            onClick={handleLogout}
-            className="w-auto mx-auto bg-[#555879] hover:bg-[#555879]/90 text-[#F4EBD3] font-medium py-1.5 px-3 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-1.5 text-xs"
-            title="Déconnexion"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            <span>Déconnexion</span>
-          </button>
-        </div>
+
       </div>
 
       {/* Main Content */}
@@ -176,6 +164,16 @@ const ModernDashboard: React.FC = () => {
                   </p>
                 </div>
               </div>
+              <button
+                onClick={handleLogout}
+                className="bg-[#796055] hover:bg-[#555879]/90 text-[#F4EBD3] font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+                title="Déconnexion"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span>Déconnexion</span>
+              </button>
             </div>
           </div>
         </header>
@@ -450,6 +448,15 @@ const ModernDashboard: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                         </svg>
                         <span>Ajouter Utilisateur</span>
+                      </button>
+                      <button
+                        onClick={() => navigate('/salary-payment')}
+                        className="w-full bg-[#DED3C4] hover:bg-[#DED3C4]/90 text-[#555879] font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 border border-[#98A1BC]/30"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                        </svg>
+                        <span>Paiement de Salaire</span>
                       </button>
                     </>
                   )}

@@ -2,10 +2,17 @@ import { Request, Response, NextFunction } from 'express';
 import { ZodSchema } from 'zod';
 import { utilisateurSchema } from '../utiles/validators/utilisateurValidator.js';
 
-export const validateSchema = (schema: ZodSchema) => {
+export const validateSchema = (schema: ZodSchema, isPartial: boolean = false) => {
     return (req: Request, res: Response, next: NextFunction) => {
         try {
-            schema.parse(req.body);
+            let dataToValidate = req.body;
+            if (isPartial) {
+                // Filter out undefined values for partial updates
+                dataToValidate = Object.fromEntries(
+                    Object.entries(req.body).filter(([_, value]) => value !== undefined)
+                );
+            }
+            schema.parse(dataToValidate);
             next();
         } catch (error) {
             res.status(400).json({ error: 'Validation failed', details: error });
