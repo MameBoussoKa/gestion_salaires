@@ -24,8 +24,8 @@ export default function Login() {
     } catch (error) {
       console.error('Login failed:', error);
 
-      if (error.response?.data?.message) {
-        setErrors({ general: error.response.data.message });
+      if (error.response?.data?.error) {
+        setErrors({ general: error.response.data.error });
       } else if (error.response?.status === 400) {
         setErrors({ general: 'Email ou mot de passe incorrect' });
       } else if (error.response?.status === 404) {

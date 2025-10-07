@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { EmployeeService } from "../service/EmployeeService.js";
+import { employeeSchema } from "../validation/validation.js";
 
 const employeeService = new EmployeeService();
 
@@ -16,7 +17,15 @@ export class EmployeeController {
       }
       // For SUPER_ADMIN, entrepriseId should be provided in body
 
-      const employee = await employeeService.create(body);
+      if (!body.role) {
+        body.role = 'EMPLOYE';
+      }
+      if (body.actif === undefined) {
+        body.actif = true;
+      }
+
+      const validatedData = employeeSchema.parse(body);
+      const employee = await employeeService.create(validatedData);
       res.status(201).json(employee);
     } catch (error: any) {
       res.status(400).json({ error: error.message });

@@ -1,7 +1,10 @@
 import type { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
 import { AuthService } from "../service/AuthService.js";
-import { loginSchema } from "../validation/validation.ts";
+import { loginSchema, registerSchema } from "../validation/validation.ts";
+
+const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
 export class AuthController {
     private authService = new AuthService();
@@ -24,9 +27,15 @@ export class AuthController {
 
     async register(req: Request, res: Response) {
         try {
-            const { nom, email, motDePasse, nomEntreprise, adresseEntreprise, role } = req.body;
-            const result = await this.authService.register(nom, email, motDePasse, nomEntreprise, adresseEntreprise, role);
-            res.json({ user: { ...result, motDePasse: undefined } });
+            const validatedData = registerSchema.parse(req.body);
+            const { nom, email, motDePasse, nomEntreprise, adresseEntreprise, role } = validatedData;
+            const user = await this.authService.register(nom, email, motDePasse, nomEntreprise, adresseEntreprise, role);
+            const token = jwt.sign(
+                { id: user.id, role: user.role, entrepriseId: user.entrepriseId },
+                JWT_SECRET,
+                { expiresIn: "1h" }
+            );
+            res.json({ token, user: { ...user, motDePasse: undefined } });
         } catch (err) {
             res.status(400).json({ error: (err as Error).message });
         }

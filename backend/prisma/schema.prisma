@@ -48,6 +48,7 @@ model Employe {
   typeContrat          TypeContrat
   tauxSalaire          Float
   coordonneesBancaires String?
+  role                 Role        @default(EMPLOYE)
   actif                Boolean     @default(true)
   entrepriseId         Int
   createdAt            DateTime    @default(now())

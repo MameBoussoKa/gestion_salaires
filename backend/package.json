@@ -4,13 +4,13 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "node --loader ts-node/esm src/main.ts",
-    "dev:watch": "nodemon --exec node --loader ts-node/esm src/main.ts",
+    "dev": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' src/main.ts",
+    "dev:watch": "nodemon --exec node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' src/main.ts",
     "build": "npm run generate && tsc",
     "start": "node dist/main.js",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
+    "seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

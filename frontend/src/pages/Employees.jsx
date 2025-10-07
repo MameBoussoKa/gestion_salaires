@@ -53,7 +53,7 @@ export default function Employees() {
     }
   };
 
-  const headers = ['Nom complet', 'Poste', 'Contrat', 'Salaire', 'Statut'];
+  const headers = ['Nom complet', 'Poste', 'Contrat', 'Salaire', 'Rôle', 'Statut'];
   if (showEntrepriseColumn) headers.push('Entreprise');
   if (showActionsColumn) headers.push('Actions');
 
@@ -63,6 +63,7 @@ export default function Employees() {
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{employee.poste}</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{employee.typeContrat}</td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">€{employee.tauxSalaire}</td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{employee.role === 'EMPLOYE' ? 'Employé' : 'Caissier'}</td>
       <td className="px-6 py-4 whitespace-nowrap">
         <Badge variant={employee.actif ? 'active' : 'inactive'}>{employee.actif ? 'Actif' : 'Inactif'}</Badge>
       </td>
@@ -186,6 +187,7 @@ function EmployeeForm({ employee, onSave, onCancel, user }) {
     typeContrat: '',
     tauxSalaire: '',
     coordonneesBancaires: '',
+    role: 'EMPLOYE',
     actif: true,
     entrepriseId: user?.entrepriseId || 1
   });
@@ -252,6 +254,18 @@ function EmployeeForm({ employee, onSave, onCancel, user }) {
           className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
         />
       </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Rôle</label>
+        <select
+          value={formData.role}
+          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary focus:border-primary"
+          required
+        >
+          <option value="EMPLOYE">Employé</option>
+          <option value="CAISSIER">Caissier</option>
+        </select>
+      </div>
       <div className="flex justify-end space-x-3">
         <Button variant="secondary" onClick={onCancel}>Annuler</Button>
         <Button type="submit">Sauvegarder</Button>
@@ -282,6 +296,10 @@ function EmployeeDetails({ employee }) {
       <div>
         <dt className="text-sm font-medium text-gray-500">Coordonnées bancaires</dt>
         <dd className="mt-1 text-sm text-gray-900">{employee.coordonneesBancaires || 'N/A'}</dd>
+      </div>
+      <div>
+        <dt className="text-sm font-medium text-gray-500">Rôle</dt>
+        <dd className="mt-1 text-sm text-gray-900">{employee.role === 'EMPLOYE' ? 'Employé' : 'Caissier'}</dd>
       </div>
       <div>
         <dt className="text-sm font-medium text-gray-500">Statut</dt>

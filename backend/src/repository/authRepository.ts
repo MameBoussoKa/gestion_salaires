@@ -18,7 +18,7 @@ export class AuthRepository {
     }
   }
 
-  async register(nom: string, email: string, motDePasse: string, nomEntreprise: string, adresseEntreprise: string, role: string = 'SUPER_ADMIN'): Promise<Utilisateur> {
+  async register(nom: string, email: string, motDePasse: string, nomEntreprise?: string, adresseEntreprise?: string, role: string = 'SUPER_ADMIN'): Promise<Utilisateur> {
     const prismaClient = this.getPrismaClient();
     try {
       const hashedPassword = await bcrypt.hash(motDePasse, 10);
@@ -31,22 +31,32 @@ export class AuthRepository {
         }
       });
 
-      const entreprise = await prismaClient.entreprise.create({
-        data: {
-          nom: nomEntreprise,
-          adresse: adresseEntreprise,
-          createdById: user.id,
+      if (role !== 'SUPER_ADMIN') {
+        if (!nomEntreprise || !adresseEntreprise) {
+          throw new Error('nomEntreprise and adresseEntreprise are required for non-SUPER_ADMIN roles');
         }
-      });
+        const entreprise = await prismaClient.entreprise.create({
+          data: {
+            nom: nomEntreprise,
+            adresse: adresseEntreprise,
+            createdById: user.id,
+          }
+        });
 
-      // Update user with entrepriseId
-      const updatedUser = await prismaClient.utilisateur.update({
-        where: { id: user.id },
-        data: { entrepriseId: entreprise.id },
-        include: { entreprise: true }
-      });
+        // Update user with entrepriseId
+        const updatedUser = await prismaClient.utilisateur.update({
+          where: { id: user.id },
+          data: { entrepriseId: entreprise.id },
+          include: { entreprise: true }
+        });
 
-      return updatedUser;
+        return updatedUser;
+      } else {
+        return await prismaClient.utilisateur.findUnique({
+          where: { id: user.id },
+          include: { entreprise: true }
+        }) as Utilisateur;
+      }
     } finally {
       await prismaClient.$disconnect();
     }
